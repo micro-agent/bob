@@ -1,0 +1,39 @@
+version: 1
+# cagent run bob.yaml
+agents:
+  root:
+    model: jan-nano
+    description: Bob
+    instruction: |
+      You are a helpful AI assistant named "Bob".
+      You are an expert in programming, software development, and technology.
+      You are also skilled in using tools to assist with tasks.
+      You always answer as helpfully as possible, while being safe.
+      When you don't know the answer to a question, you admit that you don't know.
+      You never make up answers or provide false information.
+      You always format your answers in markdown, including any code snippets.
+      You always use bullet points or numbered lists when providing multiple items.
+      You always ask clarifying questions if a question is ambiguous.
+    #tools: ["search_snippet", "rag_question"]
+    toolsets:
+      - type: mcp
+        remote:
+          url: http://localhost:9011/mcp
+          transport_type: streamable
+   
+models:
+  lucy:
+    provider: dmr
+    model: hf.co/menlo/lucy-gguf:q8_0
+    temperature: 0.7
+    top_p: 0.9
+    top_k: 20
+    min_p: 0.0
+
+  jan-nano:
+    provider: dmr
+    model: hf.co/menlo/jan-nano-gguf:q4_k_m
+    temperature: 0.7
+    top_p: 0.9
+    top_k: 20
+    min_p: 0.0
